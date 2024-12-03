@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { IonIcon } from '@ionic/angular';
 import {
   IonTabButton,
   IonIcon,
@@ -10,19 +9,17 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonLabel
+  IonLabel,
+  IonBadge
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   cartOutline,
   fastFoodOutline,
-  information,
-  library,
-  playCircle,
-  radio,
-  search,
+  information,  
   searchOutline,
 } from 'ionicons/icons';
+import { HomePage } from './home/home.page';
 
 @Component({
   selector: 'app-tabs',
@@ -39,7 +36,9 @@ import {
     IonToolbar,
     IonTitle,
     IonContent,
-    IonLabel
+    IonLabel,
+    IonBadge,
+    HomePage
   ],
 })
 export class TabsPage implements OnInit {

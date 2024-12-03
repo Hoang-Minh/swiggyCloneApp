@@ -1,16 +1,19 @@
 import { Routes } from '@angular/router';
-import { HomePage } from './home/home.page';
 import { SearchPage } from './search/search.page';
 import { CartPage } from './cart/cart.page';
 import { AccountPage } from './account/account.page';
 import { TabsPage } from './tabs.page';
+import { HomePage } from './home/home.page';
 
-export const TABS_ROUTES: Routes = [
-  
+export const TABS_ROUTES: Routes = [  
   {
     path: '',
     component: TabsPage,
     children: [
+      {
+        path: 'home',
+        component: HomePage,
+      },
       {
         path: 'search',
         component: SearchPage,
@@ -23,6 +26,11 @@ export const TABS_ROUTES: Routes = [
         path: 'account',
         component: AccountPage,
       },
+      {
+        path: '',
+        redirectTo: '/tabs/home',
+        pathMatch: 'full'
+      }
     ]
   },
   
