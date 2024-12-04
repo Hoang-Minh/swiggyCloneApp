@@ -8,23 +8,22 @@
 </ion-header>
 
 <ion-content>
-  <div>
-    <swiper-container
-      [modules]="swiperModules"
-      [slidesPerView]="1.2"
-      [autoplay]="true"
-      [spaceBetween]="20"
-      [pagination]="{ clickable: true, dynamicBullets: true }"
-    >
-      <swiper-slide>
-        <img src="assets/imgs/1.jpg" alt="image-1" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="assets/imgs/2.jpg" alt="image-2" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="assets/imgs/3.jpg" alt="image-3" />
-      </swiper-slide>
-    </swiper-container>
-  </div>
+  @if(isLoading) {
+  <ion-skeleton-text animated style="height: 25vh"></ion-skeleton-text>
+  <app-loading-restaurant></app-loading-restaurant>
+  } @else {
+  <app-banner [bannerImages]="banners"></app-banner>
+
+  <ion-list>
+    <ion-list-header class="ion-margin-bottom">
+      <ion-label>
+        <h4>Restaurant Nearby</h4>
+        <p>Discover unique tastes near you</p>
+      </ion-label>
+    </ion-list-header>
+    @for(restaurant of restaurants; track restaurant.name) {
+      <app-restaurant [restaurant]="restaurant"></app-restaurant>
+    }
+  </ion-list>
+  }
 </ion-content>

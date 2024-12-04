@@ -15,9 +15,11 @@ import {
 import { addIcons } from 'ionicons';
 import {
   cartOutline,
+  chevronDownOutline,
   fastFoodOutline,
   information,  
   searchOutline,
+  star,
 } from 'ionicons/icons';
 import { HomePage } from './home/home.page';
 
@@ -43,7 +45,7 @@ import { HomePage } from './home/home.page';
 })
 export class TabsPage implements OnInit {
   constructor() {
-    addIcons({ information, cartOutline, searchOutline, fastFoodOutline });
+    addIcons({ information, cartOutline, searchOutline, fastFoodOutline, chevronDownOutline, star });
   }
 
   ngOnInit() {
