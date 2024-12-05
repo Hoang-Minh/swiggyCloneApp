@@ -1,13 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>search</ion-title>
+    <ion-searchbar
+      animated="true"
+      debounce="800"
+      show-clear-button="focus"
+      #searchInput
+      (ionChange)="onSearchChange($event)"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">search</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  @if(loading) {
+
+  <app-loading-restaurant></app-loading-restaurant>
+  }
+  <ion-list>
+    <ion-list-header>
+      <ion-label>
+        <h4>Search result for "{{query}}"</h4>
+      </ion-label>
+    </ion-list-header>
+
+    @for(restaurant of restaurants; track restaurant.name) {
+    <app-restaurant [restaurant]="restaurant"></app-restaurant>
+
+    }
+  </ion-list>
 </ion-content>
