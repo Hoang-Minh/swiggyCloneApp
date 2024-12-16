@@ -4,6 +4,7 @@ import { CartPage } from './cart/cart.page';
 import { AccountPage } from './account/account.page';
 import { TabsPage } from './tabs.page';
 import { HomePage } from './home/home.page';
+import { ItemsPage } from './items/items.page';
 
 export const TABS_ROUTES: Routes = [  
   {
@@ -25,13 +26,12 @@ export const TABS_ROUTES: Routes = [
       {
         path: 'account',
         component: AccountPage,
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/home',
-        pathMatch: 'full'
-      }
+      }      
     ]
   },
+  {
+    path: 'restaurant/:restaurantId',
+    component: ItemsPage
+  }
   
 ];

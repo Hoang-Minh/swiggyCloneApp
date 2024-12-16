@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   IonContent,
   IonHeader,
@@ -32,7 +33,8 @@ import { RestaurantService } from 'src/app/service/restaurant.service';
     BannerComponent,
     RestaurantComponent,
     IonSkeletonText,
-    LoadingRestaurantComponent
+    LoadingRestaurantComponent,
+    RouterLink
   ],
 })
 export class HomePage implements OnInit {

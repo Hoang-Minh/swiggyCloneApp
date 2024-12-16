@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-searchbar
       animated="true"
-      debounce="800"
+      [debounce]="200"
       show-clear-button="focus"
       #searchInput
       (ionChange)="onSearchChange($event)"
@@ -11,20 +11,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  @if(loading) {
+  @if(isLoading) {
 
   <app-loading-restaurant></app-loading-restaurant>
-  }
+  } @else {
   <ion-list>
     <ion-list-header>
-      <ion-label>
-        <h4>Search result for "{{query}}"</h4>
-      </ion-label>
+      @if(query !== '') {
+        <ion-label>
+          <h4>Search result for "{{query}}"</h4>
+        </ion-label>
+      }
+      
     </ion-list-header>
 
     @for(restaurant of restaurants; track restaurant.name) {
-    <app-restaurant [restaurant]="restaurant"></app-restaurant>
+    <app-restaurant [restaurant]="restaurant" [routerLink]="['/', 'tabs', 'restaurant', restaurant.uid]"></app-restaurant>
 
     }
   </ion-list>
+  }
 </ion-content>

@@ -7,4 +7,5 @@ export interface Restaurant {
     delivery_time: number;
     distance: number;
     price: number;
+    uid: string;
 }

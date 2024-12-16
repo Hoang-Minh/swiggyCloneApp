@@ -8,6 +8,7 @@ export class RestaurantService {
 
   private readonly restaurants: Restaurant[] = [
     {
+      uid: "165efd",
       cover: 'assets/imgs/1.jpg',
       name: 'Stayfit',
       short_name: 'stayfit',
@@ -18,6 +19,7 @@ export class RestaurantService {
       price: 100,
     },
     {
+      uid: "871cac",
       cover: 'assets/imgs/2.jpg',
       name: 'Stayfit1',
       short_name: 'stayfit1',
@@ -28,6 +30,7 @@ export class RestaurantService {
       price: 100,
     },
     {
+      uid: "586egp",
       cover: 'assets/imgs/3.jpg',
       name: 'Stayfit2',
       short_name: 'stayfit2',
