@@ -1,6 +1,7 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, input, OnInit } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { IonIcon, IonItem, IonLabel, IonText, IonThumbnail } from '@ionic/angular/standalone';
+import { RestaurantService } from 'src/app/service/restaurant.service';
 
 @Component({
   selector: 'app-restaurant',
@@ -9,16 +10,9 @@ import { IonIcon, IonItem, IonLabel, IonText, IonThumbnail } from '@ionic/angula
   templateUrl: './restaurant.component.html',
   styleUrls: ['./restaurant.component.scss'],
 })
-export class RestaurantComponent  implements OnInit {
+export class RestaurantComponent {
 
   restaurant = input.required<any>();
 
-  constructor() { }
-
-  ngOnInit() {}
-
-  getCuisine(cuisines: string[]) {
-    return cuisines.join(', ');
-  }
-
+  protected readonly restaurantService = inject(RestaurantService);
 }

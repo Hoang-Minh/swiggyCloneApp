@@ -5,7 +5,7 @@
   <ion-label>
     <h4>{{restaurant()?.name}}</h4>
     <ion-text color="medium">
-      <p class="pStyle">{{getCuisine(restaurant()?.cuisines)}}</p>
+      <p class="pStyle">{{restaurantService.getCuisine(restaurant())}}</p>
       <ion-text color="dark">
         <span>
           <ion-icon name="star"></ion-icon>

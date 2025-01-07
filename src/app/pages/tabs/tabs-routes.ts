@@ -9,8 +9,8 @@ import { ItemsPage } from './items/items.page';
 export const TABS_ROUTES: Routes = [  
   {
     path: '',
-    component: TabsPage,
-    children: [
+    component: TabsPage,    
+    children: [      
       {
         path: 'home',
         component: HomePage,
