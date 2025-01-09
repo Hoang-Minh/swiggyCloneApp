@@ -19,11 +19,15 @@ import {
   IonListHeader,
   IonThumbnail,
   IonItem,
-  IonToggle
+  IonToggle,
+  IonFooter,
+  IonButton
 } from '@ionic/angular/standalone';
 import { RestaurantService } from 'src/app/service/restaurant.service';
 import { ActivatedRoute } from '@angular/router';
 import { Restaurant } from 'src/app/models/restaurant.model';
+import { star, removeOutline, addOutline, cart, basketOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-items',
@@ -49,7 +53,9 @@ import { Restaurant } from 'src/app/models/restaurant.model';
     IonListHeader,
     IonThumbnail,
     IonItem,
-    IonToggle
+    IonToggle,
+    IonFooter,
+    IonButton
   ],
 })
 export class ItemsPage implements OnInit {
@@ -64,6 +70,7 @@ export class ItemsPage implements OnInit {
 
   ngOnInit() {
 
+    addIcons({ star, addOutline, removeOutline, basketOutline });
     this.route.paramMap.subscribe((paramMap) => {
 
       if(!paramMap.has('restaurantId')) {
