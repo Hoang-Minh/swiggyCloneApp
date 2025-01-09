@@ -18,7 +18,8 @@ import {
   IonList,
   IonListHeader,
   IonThumbnail,
-  IonItem
+  IonItem,
+  IonToggle
 } from '@ionic/angular/standalone';
 import { RestaurantService } from 'src/app/service/restaurant.service';
 import { ActivatedRoute } from '@angular/router';
@@ -47,7 +48,8 @@ import { Restaurant } from 'src/app/models/restaurant.model';
     IonList,
     IonListHeader,
     IonThumbnail,
-    IonItem
+    IonItem,
+    IonToggle
   ],
 })
 export class ItemsPage implements OnInit {

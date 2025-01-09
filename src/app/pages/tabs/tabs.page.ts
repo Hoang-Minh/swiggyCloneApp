@@ -50,6 +50,6 @@ export class TabsPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Hello');
+    
   }
 }

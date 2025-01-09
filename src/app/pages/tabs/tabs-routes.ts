@@ -26,6 +26,11 @@ export const TABS_ROUTES: Routes = [
       {
         path: 'account',
         component: AccountPage,
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/home',
+        pathMatch: 'full'
       }      
     ]
   },
