@@ -25,9 +25,10 @@ import {
 } from '@ionic/angular/standalone';
 import { RestaurantService } from 'src/app/service/restaurant.service';
 import { ActivatedRoute } from '@angular/router';
-import { Restaurant } from 'src/app/models/restaurant.model';
+import { Category, FoodItem, Restaurant } from 'src/app/models/restaurant.model';
 import { star, removeOutline, addOutline, cart, basketOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+
 
 @Component({
   selector: 'app-items',
@@ -63,6 +64,8 @@ export class ItemsPage implements OnInit {
   id!: string;
   data!: Restaurant;
   veg: boolean = false;
+  categories: Category[] = [];
+  foodItems: FoodItem[] = [];
 
   protected readonly restaurantService = inject(RestaurantService);
   private readonly route = inject(ActivatedRoute);
@@ -79,16 +82,39 @@ export class ItemsPage implements OnInit {
       }
 
       this.id = paramMap.get('restaurantId')!;
+      console.log("id", this.id);
       this.getItem();
+      this.getCategories();
+      
     });
   }
 
   getItem() {
     this.data = this.restaurantService.getRestaurant.find((restaurant) => restaurant.uid === this.id)!;
-    console.log("data", this.data);
+    this.getFoodItems(this.id);
+  }
+
+  getCategories(): void {
+    this.categories = this.restaurantService.getCategories.filter((category) => category.uid === this.id);
+  }
+
+  getFoodItems(id: string): void {
+    this.foodItems = this.restaurantService.getRestaurantFoodItems(id);    
+    console.log("food items", this.foodItems);
   }
 
   vegOnly(event) {
     console.log(event.detail.checked);
   }
+
+  removeItem(item: FoodItem, index: number) {
+    this.foodItems[index].quantity--;
+    console.log("Food items", this.foodItems);
+  }
+
+  addItem(item: FoodItem, index: number) {
+    this.foodItems[index].quantity++;
+    console.log("Food items", this.foodItems);
+  }
 }
+

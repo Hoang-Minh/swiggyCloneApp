@@ -29,4 +29,5 @@ export interface FoodItem {
   uid: string;
   variation: boolean;
   veg: boolean;
+  quantity: number;
 }

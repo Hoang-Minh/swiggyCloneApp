@@ -48,6 +48,7 @@ export class RestaurantService {
   private readonly foodItems: FoodItem[] = [
     {
       categoryId: 'e00',
+      quantity: 0,
       cover: 'assets/imgs/pizza.jpg',
       desc: 'Great in taste',
       id: 'i1',
@@ -55,12 +56,13 @@ export class RestaurantService {
       price: 120,
       rating: 0,
       status: true,
-      uid: '12wefdss',
+      uid: '165efd',
       variation: false,
       veg: false,
     },
     {
       categoryId: 'e01',
+      quantity: 0,
       cover: 'assets/imgs/salad.jpg',
       desc: 'Great in taste',
       id: 'i2',
@@ -68,12 +70,13 @@ export class RestaurantService {
       price: 200,
       rating: 0,
       status: true,
-      uid: '12wefdss',
+      uid: '165efd',
       variation: false,
       veg: true,
     },
     {
       categoryId: 'e00',
+      quantity: 0,
       cover: 'assets/imgs/pasta.jpg',
       desc: 'Great in taste',
       id: 'i3',
@@ -81,7 +84,7 @@ export class RestaurantService {
       price: 150.5,
       rating: 0,
       status: true,
-      uid: '12wefdss',
+      uid: '165efd',
       variation: false,
       veg: false,
     },
@@ -111,8 +114,8 @@ export class RestaurantService {
     return this.categories;
   }
 
-  get getFoodItems(): FoodItem[] {
-    return this.foodItems;
+  getRestaurantFoodItems(id: string): FoodItem[] {
+    return this.foodItems.filter(x => x.uid === id);    
   }
 
   getCuisine(restaurant: Restaurant): string {
