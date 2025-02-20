@@ -31,3 +31,9 @@ export interface FoodItem {
   veg: boolean;
   quantity: number;
 }
+
+export interface CartData {
+  items: FoodItem[];
+  totalItems: number;
+  totalPrice: number;
+}

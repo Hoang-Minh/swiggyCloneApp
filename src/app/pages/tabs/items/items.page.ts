@@ -24,8 +24,8 @@ import {
   IonButton
 } from '@ionic/angular/standalone';
 import { RestaurantService } from 'src/app/service/restaurant.service';
-import { ActivatedRoute } from '@angular/router';
-import { Category, FoodItem, Restaurant } from 'src/app/models/restaurant.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CartData, Category, FoodItem, Restaurant } from 'src/app/models/restaurant.model';
 import { star, removeOutline, addOutline, cart, basketOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
@@ -56,19 +56,21 @@ import { addIcons } from 'ionicons';
     IonItem,
     IonToggle,
     IonFooter,
-    IonButton
+    IonButton    
   ],
 })
 export class ItemsPage implements OnInit {
 
   id!: string;
-  data!: Restaurant;
-  veg: boolean = false;
+  restaurant!: Restaurant;
+  isVegan: boolean = false;
   categories: Category[] = [];
   foodItems: FoodItem[] = [];
+  cartData: CartData;
 
   protected readonly restaurantService = inject(RestaurantService);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly navCtrl = inject(NavController);
 
   ngOnInit() {
@@ -83,38 +85,65 @@ export class ItemsPage implements OnInit {
 
       this.id = paramMap.get('restaurantId')!;
       console.log("id", this.id);
-      this.getItem();
-      this.getCategories();
-      
+
+      //TODO: need not to reset cart data
+      this.cartData = { items: [], totalItems: 0, totalPrice: 0 };
+      this.getRestaurantItem();      
     });
   }
 
-  getItem() {
-    this.data = this.restaurantService.getRestaurant.find((restaurant) => restaurant.uid === this.id)!;
-    this.getFoodItems(this.id);
+  getRestaurantItem() {    
+
+    this.restaurant = this.restaurantService.getRestaurant.find((restaurant) => restaurant.uid === this.id)!; // get restaurant data
+    this.foodItems = this.getFoodItems(this.id); // get food items
+    this.categories = this.getCategories(); // get categories
   }
 
-  getCategories(): void {
-    this.categories = this.restaurantService.getCategories.filter((category) => category.uid === this.id);
+  getCategories(): Category[] {
+    return this.restaurantService.getCategories.filter((category) => category.uid === this.id);
   }
 
-  getFoodItems(id: string): void {
-    this.foodItems = this.restaurantService.getRestaurantFoodItems(id);    
-    console.log("food items", this.foodItems);
+  getFoodItems(id: string): FoodItem[] {    
+    return this.restaurantService.getRestaurantFoodItems(id, this.isVegan);        
   }
 
   vegOnly(event) {
-    console.log(event.detail.checked);
+
+    this.isVegan = event.detail.checked as boolean;
+    this.foodItems = this.getFoodItems(this.id); // get food items
   }
 
-  removeItem(item: FoodItem, index: number) {
-    this.foodItems[index].quantity--;
-    console.log("Food items", this.foodItems);
+  removeItem(item: FoodItem, index: number): void {
+
+    if(this.foodItems[index].quantity === 0) return;
+    this.foodItems[index].quantity--;    
+    this.calculate();
+  } 
+
+  addItem(item: FoodItem, index: number): void {
+    this.foodItems[index].quantity++;    
+    this.calculate();
   }
 
-  addItem(item: FoodItem, index: number) {
-    this.foodItems[index].quantity++;
-    console.log("Food items", this.foodItems);
+  calculate(): void {
+
+    this.cartData.items = this.foodItems.filter((item) => item.quantity > 0);
+    this.cartData.totalItems = this.cartData.items.reduce((acc, item) => acc + item.quantity, 0);
+    this.cartData.totalPrice = this.cartData.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+    console.log("cart data", this.cartData);    
+  }
+
+  viewCart(): void {
+    if(this.cartData.totalItems === 0) return; // TODO: still go to cart and show no items
+    this.saveToCart();
+    //this.router.navigate(['/', 'tabs', 'cart', this.id]);
+  }
+
+  saveToCart(): void {
+    
+    //this.cartData.items = [];
+
   }
 }
 

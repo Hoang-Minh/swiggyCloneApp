@@ -114,8 +114,8 @@ export class RestaurantService {
     return this.categories;
   }
 
-  getRestaurantFoodItems(id: string): FoodItem[] {
-    return this.foodItems.filter(x => x.uid === id);    
+  getRestaurantFoodItems(id: string, isVegan: boolean): FoodItem[] {
+    return this.foodItems.filter(x => x.uid === id && x.veg === isVegan);    
   }
 
   getCuisine(restaurant: Restaurant): string {
